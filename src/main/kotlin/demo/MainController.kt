@@ -3,7 +3,7 @@ package demo
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.*
 
 @Controller
 class `MainController` (private val repository: UserRepository) {
@@ -18,6 +18,25 @@ class `MainController` (private val repository: UserRepository) {
         } else {
             model["name"] = "Default";
         }
+
+        return "blog";
+    }
+
+    @PostMapping("/saveUser")
+    fun save(@ModelAttribute user:User, model: Model):String {
+
+        println("test me now!! " + user.firstname);
+        user.login = "mynamesaved";
+        user.description = "description";
+        val userTemp = repository.save(user);
+
+        if (userTemp?.firstname != null) {
+            model["name"] = userTemp?.firstname;
+        } else {
+            model["name"] = "Default";
+        }
+
+        model["title"] = "My Application";
 
         return "blog";
     }
