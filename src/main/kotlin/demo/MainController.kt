@@ -23,7 +23,7 @@ class `MainController` (private val repository: UserRepository) {
     }
 
     @PostMapping("/saveUser")
-    fun save(@ModelAttribute user:User, model: Model):String {
+    fun save(@ModelAttribute user: User, model: Model):String {
 
         println("test me now!! " + user.firstname);
         user.login = "mynamesaved";
@@ -31,7 +31,7 @@ class `MainController` (private val repository: UserRepository) {
         val userTemp = repository.save(user);
 
         if (userTemp?.firstname != null) {
-            model["name"] = userTemp?.firstname;
+            model["name"] = userTemp?.firstname!!;
         } else {
             model["name"] = "Default";
         }
