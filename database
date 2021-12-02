@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 29 nov. 2021 à 16:15
+-- Généré le :  jeu. 02 déc. 2021 à 15:48
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
@@ -31,8 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
-  `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
   `description` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -41,12 +41,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `login`, `firstname`, `lastname`, `description`) VALUES
-(1, 'mynamesaved', 'John', 'Doe', 'description'),
-(2, 'mynamesaved', 'John2', 'Doe', 'description'),
-(3, 'myname', 'nom', 'prenom', 'test'),
-(4, 'mynamesaved', 'John', 'Doe', 'description'),
-(5, 'mynamesaved', 'John', 'Doe', 'description'),
-(6, 'mynamesaved', 'John2', 'Doe', 'description');
+(1, 'mynamesaved', 'John', 'Doe', 'description');
 
 --
 -- Index pour les tables déchargées
@@ -66,7 +61,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

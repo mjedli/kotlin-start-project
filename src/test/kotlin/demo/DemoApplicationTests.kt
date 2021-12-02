@@ -55,4 +55,22 @@ class DemoApplicationTests(@Autowired val restTemplate: TestRestTemplate) {
 		}
 	}
 
+	@Test
+	fun `Assert blog page title, content and status code for post exception`() {
+
+		val data = LinkedMultiValueMap(
+			mapOf("firstname" to listOf(""), "lastname" to listOf("Doe"))
+		)
+
+		val headers = HttpHeaders()
+		headers.contentType = MediaType.APPLICATION_FORM_URLENCODED
+		val requestEntity: HttpEntity<MultiValueMap<String, String>> = HttpEntity(data, headers)
+
+		try {
+			val entity = restTemplate.postForEntity<String>("/saveUser", requestEntity);
+		} catch (e: Exception) {
+			assertThat(e.message).isEqualTo("code error 1")
+		}
+	}
+
 }

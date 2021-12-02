@@ -25,20 +25,31 @@ class `MainController` (private val repository: UserRepository) {
     @PostMapping("/saveUser")
     fun save(@ModelAttribute user: User, model: Model):String {
 
-        println("test me now!! " + user.firstname);
-        user.login = "mynamesaved";
-        user.description = "description";
-        val userTemp = repository.save(user);
+        try {
+            println("test me now!! " + user.firstname);
+            user.login = "mynamesaved";
+            user.description = "description";
 
-        if (userTemp?.firstname != null) {
-            model["name"] = userTemp?.firstname!!;
-        } else {
-            model["name"] = "Default";
+            if(user.firstname == "") {
+                throw RuntimeException();
+            }
+
+            val userTemp = repository.save(user);
+
+            if (userTemp?.firstname != null) {
+                model["name"] = userTemp?.firstname!!;
+            } else {
+                model["name"] = "Default";
+            }
+
+            model["title"] = "My Application";
+
+            return "blog";
+        }
+        catch (e: RuntimeException) {
+            throw Exception("code error 1");
         }
 
-        model["title"] = "My Application";
-
-        return "blog";
     }
 
 }

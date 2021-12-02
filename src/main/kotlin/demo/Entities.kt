@@ -9,8 +9,8 @@ import javax.persistence.GenerationType
 @Entity
 class User (
     var login: String? = null,
-    var firstname: String? = null,
-    var lastname: String? = null,
+    var firstname: String,
+    var lastname: String,
     var description: String? = null,
     @Id @GeneratedValue(strategy= GenerationType.AUTO) var id: Integer? = null
 )
