@@ -55,10 +55,6 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 
 		every { userRepository.save(any()) } returns user
 
-		val multimap1: MultiValueMap<String, String> = LinkedMultiValueMap(
-			mapOf("firstname" to listOf("John"), "lastname" to listOf("Doe"))
-		)
-
 		val multimap: MultiValueMap<String, String> = LinkedMultiValueMap();
 		multimap.add("firstname", "John");
 		multimap.add("lastname", "Doe");
@@ -81,14 +77,9 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 
 		every { userRepository.save(any()) } returns user
 
-		val multimap1: MultiValueMap<String, String> = LinkedMultiValueMap(
-			mapOf("firstname" to listOf("John"), "lastname" to listOf("Doe"))
-		)
-
 		val multimap: MultiValueMap<String, String> = LinkedMultiValueMap();
 		multimap.add("firstname", "");
 		multimap.add("lastname", "Doe");
-
 
 		try {
 
