@@ -4,6 +4,7 @@ import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.verify
 import org.assertj.core.api.Assertions.assertThat
+import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -42,8 +43,8 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 		mockMvcTest.get("/")
 			.andExpect{status{isOk()}}
 			.andExpect{ content { contentType("text/html;charset=UTF-8")}}
-			.andExpect{xpath("/html/head/title/*").string("My Application")}
-			.andExpect{xpath("/html/body/h3/*").string("firstname")}
+			.andExpect{xpath("/html/head/title").string(containsString("My Application"))}
+			.andExpect{xpath("/html/body/h3").string(containsString("firstname"))}
 
 		verify { userRepository.findByLogin("myname") }
 	}
@@ -64,8 +65,8 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 				.contentType("text/html;charset=UTF-8")
 				.accept("text/html;charset=UTF-8")
 		)
-			.andExpect{xpath("/html/head/title/*").string("My Application")}
-			.andExpect{xpath("/html/body/h3/*").string("firstname")}
+			.andExpect{xpath("/html/head/title").string(containsString("My Application"))}
+			.andExpect{xpath("/html/body/h3").string(containsString("firstname"))}
 
 		verify { userRepository.save(any()) }
 	}
@@ -88,8 +89,6 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 						.contentType("text/html;charset=UTF-8")
 						.accept("text/html;charset=UTF-8")
 				)
-					.andExpect{xpath("/html/head/title/*").string("My Application")}
-					.andExpect{xpath("/html/body/h3/*").string("firstname")}
 
 		} catch (e: Exception) {
 			e.message?.let { assertEquals(it, "code error 1", "code error 1") }
