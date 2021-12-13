@@ -45,8 +45,7 @@ class `MainController` (private val repository: UserRepository) {
             model["title"] = "My Application";
 
             return "blog";
-        }
-        catch (e: RuntimeException) {
+        } catch (e: RuntimeException) {
             throw Exception("code error 1");
         }
 
