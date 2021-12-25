@@ -98,21 +98,6 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 		}
 	}
 
-	@Test
-	fun `Assert blog page title, content and status code for delete`() {
-
-		val myList: UserRepository = mock(UserRepository::class.java)
-		val spy = spyk(userRepository)
-		doNothing().`when`(userRepositoryRelaxed.deleteById(0))
-
-		mockMvcTest.get("/deleteUser/0")
-			.andExpect{status{isOk()}}
-			.andExpect{ content { contentType("text/html;charset=UTF-8")}}
-			.andExpect{xpath("/html/head/title").string(containsString("My Application"))}
-			.andExpect{xpath("/html/body/h6").string(containsString("0"))}
-
-		verify { userRepository.deleteById("0".toInt()) }
-
-	}
+//
 
 }
