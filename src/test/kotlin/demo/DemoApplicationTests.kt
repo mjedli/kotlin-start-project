@@ -13,14 +13,18 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
+import javax.persistence.EntityManager
+import javax.persistence.PersistenceContext
 
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-	properties = [
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [],
+		properties = [
 		"spring.datasource.url=jdbc:mysql://localhost:3306/db"
 	]
 )
-class DemoApplicationTests(@Autowired val restTemplate: TestRestTemplate) {
+class DemoApplicationTests(@Autowired val restTemplate: TestRestTemplate,
+						   @Autowired private val repository: UserRepository) {
+
 
 	@Test
 	fun contextLoads() {
@@ -71,6 +75,24 @@ class DemoApplicationTests(@Autowired val restTemplate: TestRestTemplate) {
 		} catch (e: Exception) {
 			assertThat(e.message).isEqualTo("code error 1")
 		}
+	}
+
+
+
+	@Test
+	fun `Assert blog page title, content and status code for delete`() {
+
+		val user:User = User(firstname = "firstname", lastname = "lastname", login = "login", description = "description")
+
+		val userTemp: User? = repository.save(user);
+		val id:String? = userTemp?.id.toString();
+
+		val entity = restTemplate.getForEntity<String>("/deleteUser/$id")
+		assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+		assertThat(entity.body).contains("<title>My Application</title>")
+		assertThat(entity.body).contains("<h6>0</h6>")
+		assertThat(entity.body).contains("/deleteUser/0")
+
 	}
 
 }

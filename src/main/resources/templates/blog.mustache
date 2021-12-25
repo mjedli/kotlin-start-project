@@ -11,5 +11,10 @@
 </form>
 
 <h3>{{name}}</h3>
+<h6>{{id}}</h6>
+
+<form action="/deleteUser/{{id}}" method="get">
+  <input type="submit" value="Delete">
+</form>
 
 {{> footer}}

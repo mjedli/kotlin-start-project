@@ -12,5 +12,5 @@ class User (
     var firstname: String,
     var lastname: String,
     var description: String? = null,
-    @Id @GeneratedValue(strategy= GenerationType.AUTO) var id: Integer? = null
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int? = null
 )

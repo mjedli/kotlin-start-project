@@ -15,8 +15,10 @@ class `MainController` (private val repository: UserRepository) {
 
         if (repository.findByLogin("myname")?.firstname != null) {
             model["name"] = repository.findByLogin("myname")?.firstname!!;
+            model["id"] = repository.findByLogin("myname")?.id.toString()!!;
         } else {
             model["name"] = "Default";
+            model["id"] = "0";
         }
 
         return "blog";
@@ -38,8 +40,10 @@ class `MainController` (private val repository: UserRepository) {
 
             if (userTemp?.firstname != null) {
                 model["name"] = userTemp?.firstname!!;
+                model["id"] = userTemp?.id.toString()!!;
             } else {
                 model["name"] = "Default";
+                model["id"] = "0";
             }
 
             model["title"] = "My Application";
@@ -48,7 +52,20 @@ class `MainController` (private val repository: UserRepository) {
         } catch (e: RuntimeException) {
             throw Exception("code error 1");
         }
+    }
 
+    // delete mapping
+    @GetMapping("/deleteUser/{id}")
+    fun delete(@PathVariable id:String , model: Model):String {
+
+        model["title"] = "My Application";
+        model["name"] = "Default";
+        model["id"] = "0";
+        println("id : $id");
+
+        repository.deleteById(id.toInt());
+
+        return "blog";
     }
 
 }
