@@ -1,26 +1,25 @@
 package demo
 
 import com.ninjasquad.springmockk.MockkBean
-import com.ninjasquad.springmockk.clear
-import com.ninjasquad.springmockk.isMock
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.spyk
 import io.mockk.verify
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito.doNothing
-import org.mockito.Mockito.mock
+import org.mockito.Mockito
+import org.mockito.Mockito.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.context.annotation.Bean
 import org.springframework.test.util.AssertionErrors.assertEquals
 import org.springframework.test.web.client.match.MockRestRequestMatchers.xpath
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.view
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
+import javax.annotation.PostConstruct
 
 
 @WebMvcTest
@@ -98,6 +97,31 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 		}
 	}
 
-//
+	/*
+	@Autowired
+	private lateinit var userRepositoryTemp: UserRepository;
 
+	var spy = spyk(userRepositoryTemp)
+
+	@Test
+	fun `Assert blog page title, content and status code for delete`() {
+
+		val myList: UserRepository = mock(UserRepository::class.java)
+		//val spy = spyk(userRepository)
+		//doNothing().`when`(userRepositoryRelaxed.deleteById().isMock)
+
+		//userRepositoryTemp = spy<Any>(myList)
+
+		doNothing().`when`(spy).deleteById(0);
+
+		mockMvcTest.get("/deleteUser/0")
+			.andExpect{status{isOk()}}
+			.andExpect{ content { contentType("text/html;charset=UTF-8")}}
+			.andExpect{xpath("/html/head/title").string(containsString("My Application"))}
+			.andExpect{xpath("/html/body/h6").string(containsString("0"))}
+
+		verify { userRepository.deleteById("0".toInt()) }
+
+	}
+	*/
 }

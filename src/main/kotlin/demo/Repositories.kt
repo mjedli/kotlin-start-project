@@ -1,9 +1,6 @@
 package demo
 
 import org.springframework.data.repository.CrudRepository
-import org.springframework.transaction.annotation.Transactional
-import javax.persistence.EntityManager
-import javax.persistence.PersistenceContext
 
 
 interface UserRepository : CrudRepository<User, Int> {
