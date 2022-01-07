@@ -3,6 +3,7 @@ package com.example.demo
 import com.example.demo.entity.User
 import com.example.demo.repositroy.UserRepository
 import com.example.demo.repositroy.UserRepositoryPer
+import com.example.demo.services.Services
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.verify
@@ -27,10 +28,7 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 	}
 
 	@MockkBean
-	private lateinit var userRepository: UserRepository;
-
-	@MockkBean
-	private lateinit var userRepositoryPer: UserRepositoryPer;
+	private lateinit var userRepository: Services;
 
 	@Test
 	fun `Assert blog page title, content and status code`() {
@@ -97,7 +95,7 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 	@Test
 	fun `Assert blog page title, content and status code for delete`() {
 
-		every { userRepositoryPer.deleteById(any()) } returns 1
+		every { userRepository.deleteById(any()) } returns 1
 
 		mockMvcTest.get("/deleteUser/0")
 			.andExpect{status{isOk()}}
@@ -105,7 +103,7 @@ class DemoApplicationMockTests(@Autowired val mockMvcTest: MockMvc) {
 			.andExpect{xpath("/html/head/title").string(containsString("My Application"))}
 			.andExpect{xpath("/html/body/h6").string(containsString("0"))}
 
-		verify { userRepositoryPer.deleteById("0".toInt()) }
+		verify { userRepository.deleteById("0".toInt()) }
 
 	}
 

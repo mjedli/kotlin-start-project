@@ -1,7 +1,7 @@
 package com.example.demo
 
 import com.example.demo.entity.User
-import com.example.demo.repositroy.UserRepository
+import com.example.demo.services.Services
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,7 +24,7 @@ import org.springframework.util.MultiValueMap
 	]
 )
 class DemoApplicationTests(@Autowired val restTemplate: TestRestTemplate,
-						   @Autowired private val repository: UserRepository
+						   @Autowired private val repository: Services
 ) {
 
 	@Test

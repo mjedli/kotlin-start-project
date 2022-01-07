@@ -1,17 +1,14 @@
 package com.example.demo.controller
 
 import com.example.demo.entity.User
-import com.example.demo.repositroy.UserRepository
-import com.example.demo.repositroy.UserRepositoryPer
+import com.example.demo.services.Services
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
 
 @Controller
-class `MainController` (private val repository: UserRepository,
-                        private val repositoryPer: UserRepositoryPer
-) {
+class `MainController` (private val repository: Services) {
 
     @GetMapping("/")
     fun blog(model: Model):String {
@@ -68,7 +65,7 @@ class `MainController` (private val repository: UserRepository,
         model["id"] = "0";
         println("id : $id");
 
-        repositoryPer.deleteById(id.toInt());
+        repository.deleteById(id.toInt());
 
         return "blog";
     }
